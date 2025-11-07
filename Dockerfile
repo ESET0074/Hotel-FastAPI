@@ -3,20 +3,17 @@ FROM python:3.9-slim
 # Set working directory
 WORKDIR /app
 
-# Copy dependency list first (helps in caching)
+# Copy dependency list first (for caching)
 COPY requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy rest of the project
+# Copy project files (including .keras model)
 COPY . /app
 
-# Train the model to generate iris_model.pkl
-RUN python train.py
-
-# Expose port for FastAPI
+# Expose FastAPI port
 EXPOSE 8000
 
-# Start FastAPI server
+# Start FastAPI app
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
