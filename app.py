@@ -44,8 +44,6 @@ preprocessor = make_column_transformer(
     (transformer_cat, features_cat),
 )
 
-# Refit the preprocessor on some sample of the dataset for encoder consistency
-# (You must have the same 'hotel.csv' file in your project)
 df = pd.read_csv("hotel.csv")
 df['arrival_date_month'] = df['arrival_date_month'].map({
     'January':1, 'February':2, 'March':3, 'April':4, 'May':5, 'June':6,
